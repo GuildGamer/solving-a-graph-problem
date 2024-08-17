@@ -118,7 +118,6 @@ data = []
 
 
 def is_connected_fn(a, b, b_position):
-    # print("A", a, "B", b, "POSITION", b_position)
     if a.isupper() and b.isupper():
         return True
 
@@ -138,7 +137,6 @@ def is_connected_fn(a, b, b_position):
 
     rules[a][b_position].extend(alphabet)
 
-    # print("RULES", rules)
     return b in rules[a][b_position]
 
 
@@ -177,6 +175,7 @@ def check_all_connections(element, previous_direction, memo={}):
     for direction in ["up", "down", "left", "right"]:
         # Check if it is connected to the cell on top
         if direction == "up":
+    
             up = get_element(up_cell[0], up_cell[1])
             if up and up_cell[0] >= 0 and up_cell[1] >= 0:
                 if previous_direction != "down":
@@ -184,10 +183,12 @@ def check_all_connections(element, previous_direction, memo={}):
                     print("Is connected to UP cell ", f"[{up}]", ":", is_connected)
                     if is_connected and up[0] == "*":
                         return True
+                    
                     elif is_connected and up[0] != "*":
                         all_connections = check_all_connections(up, "up", memo)
                         if all_connections == True:
                             return True
+
                         else:
                             continue
                     else:
